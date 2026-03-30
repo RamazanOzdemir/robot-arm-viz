@@ -1,39 +1,44 @@
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Grid } from "@react-three/drei";
-import { useState } from "react";
-import RobotArm from "./components/robot-arm";
-import ControlPanel from "./components/controls/control-panel";
-import type { JointAngles } from "./types/robot";
 import { Header } from "./components/layout/header";
 import { StatusBar } from "./components/layout/status-bar";
 
 import "./App.css";
+import RobotScene from "./Scene";
+import { usePickAndPlaceController } from "./hooks/use-pick-and-place";
+import { cn } from "./utility";
 
+// ─────────────────────────────────────────────────────────────────
+// App — lives OUTSIDE Canvas
+// Owns UI state via controller hook. Passes bridge into Canvas.
+// ─────────────────────────────────────────────────────────────────
 export default function App() {
-  const [joints, setJoints] = useState<JointAngles>({
-    base: 0,
-    upper: 0,
-    lower: 0,
-    gripper: 0, // 0 = closed, 100 = fully open
-  });
+  const { phase, isRunning, joints, start, bridge } =
+    usePickAndPlaceController();
 
   return (
-    <div className="container">
-      {/* Header */}
+    <div className="w-screen h-screen bg-bg-dark relative">
       <Header />
-      {/* 3D Scene */}
-      <Canvas camera={{ position: [3, 3, 3], fov: 60 }}>
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[5, 5, 5]} intensity={1} />
-        <OrbitControls />
-        <Grid infiniteGrid fadeDistance={30} />
-        <RobotArm joints={joints} />
+
+      <Canvas camera={{ position: [5, 5, 5], fov: 60 }}>
+        <RobotScene bridge={bridge} joints={joints} phase={phase} />
       </Canvas>
 
-      {/* Control Panel */}
-      <ControlPanel joints={joints} onChange={setJoints} />
+      {/* Animation control button */}
+      <div className="absolute bottom-20 left-1/2 -translate-x-1/2">
+        <button
+          className={cn(
+            "px-7 py-2.5 text-[15px] rounded-lg border-none text-white",
+            isRunning
+              ? "bg-muted cursor-not-allowed"
+              : "bg-accent cursor-pointer",
+          )}
+          onClick={start}
+          disabled={isRunning}
+        >
+          {isRunning ? `${phase}...` : "▶ Pick & Place"}
+        </button>
+      </div>
 
-      {/* Bottom status bar */}
       <StatusBar />
     </div>
   );
