@@ -1,17 +1,6 @@
 export function StatusBar() {
   return (
-    <div
-      style={{
-        position: "absolute",
-        bottom: 20,
-        left: "50%",
-        transform: "translateX(-50%)",
-        color: "#555",
-        fontFamily: "monospace",
-        fontSize: 11,
-        textAlign: "center",
-      }}
-    >
+    <div className="absolute bottom-5 left-1/2 -translate-x-1/2 text-muted font-mono text-[11px] text-center">
       drag to orbit · scroll to zoom · sliders to control joints
     </div>
   );

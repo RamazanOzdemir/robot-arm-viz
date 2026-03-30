@@ -1,24 +1,13 @@
 export function Header() {
   return (
-    <div
-      style={{
-        position: "absolute",
-        top: 20,
-        right: 20,
-        color: "white",
-        fontFamily: "monospace",
-        textAlign: "right",
-      }}
-    >
-      <div style={{ fontSize: 22, fontWeight: "bold", color: "#2a9d8f" }}>
-        gauss.arm
-      </div>
-      <div style={{ fontSize: 12, color: "#aaa", marginTop: 4 }}>
+    <div className="absolute top-5 right-5 text-white font-mono text-right">
+      <p className="text-[22px] font-bold text-teal">gauss.arm</p>
+      <p className="text-[12px] text-subtle mt-1">
         Interactive Robot Arm Visualizer
-      </div>
-      <div style={{ fontSize: 11, color: "#555", marginTop: 2 }}>
+      </p>
+      <p className="text-[11px] text-muted mt-0.5">
         built with React · Three.js · R3F
-      </div>
+      </p>
     </div>
   );
 }
