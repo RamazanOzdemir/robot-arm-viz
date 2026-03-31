@@ -1,5 +1,5 @@
 import type { RefObject } from "react";
-import type { JointAngles } from "./robot";
+import type { JointAngles, Metric } from "./robot";
 
 export type AnimationPhase =
   | "idle"
@@ -25,4 +25,5 @@ export interface AnimationBridge {
   onJointsChange: RefObject<(j: JointAngles) => void>;
   onPhaseChange: RefObject<(p: AnimationPhase) => void>;
   onRunningChange: RefObject<(r: boolean) => void>;
+  onMetricChange: RefObject<(m: Partial<Metric>) => void>;
 }

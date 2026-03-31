@@ -4,3 +4,8 @@ export interface JointAngles {
   lower: number;
   gripper: number;
 }
+
+export interface Metric {
+  cycle: number;
+  fps: number;
+}
