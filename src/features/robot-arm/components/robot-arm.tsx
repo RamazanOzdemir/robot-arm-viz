@@ -1,19 +1,17 @@
-import type { AnimationPhase } from "@/types/animation";
 import type { JointAngles } from "@/types/robot";
+import { deg } from "@/utility";
 import { useRef, type RefObject } from "react";
 import type { Group } from "three";
 import { ArmSegment } from "./arm-segment";
 import { Base } from "./base";
 import { Gripper } from "./gripper";
 import { Joint } from "./joint";
-import { deg } from "@/utility";
 
 export interface RobotArmProps {
   joints: JointAngles;
-  phase: AnimationPhase;
   gripperRef: RefObject<Group | null>;
 }
-export default function RobotArm({ joints, phase, gripperRef }: RobotArmProps) {
+export default function RobotArm({ joints, gripperRef }: RobotArmProps) {
   const baseRef = useRef<Group>(null);
   return (
     <group
@@ -36,11 +34,7 @@ export default function RobotArm({ joints, phase, gripperRef }: RobotArmProps) {
           <group rotation={[0, 0, deg(joints.lower)]}>
             <ArmSegment length={1.2} color="#457b9d">
               {/* Gripper */}
-              <Gripper
-                spread={joints.gripper}
-                phase={phase}
-                gripperRef={gripperRef}
-              />
+              <Gripper spread={joints.gripper} gripperRef={gripperRef} />
             </ArmSegment>
           </group>
         </ArmSegment>

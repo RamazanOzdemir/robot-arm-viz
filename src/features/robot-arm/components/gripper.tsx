@@ -1,27 +1,18 @@
 import { useFrame } from "@react-three/fiber";
 import { type RefObject } from "react";
 import { Group, Vector3 } from "three";
-import type { AnimationPhase } from "../../../types/animation";
 
 export interface GripperProps {
   spread: number;
-  phase: AnimationPhase;
   gripperRef: RefObject<Group | null>;
 }
 
-export function Gripper({ spread, phase, gripperRef }: GripperProps) {
+export function Gripper({ spread, gripperRef }: GripperProps) {
   const offset = spread * 0.003; // max ~0.3 units apart
   useFrame(() => {
     if (gripperRef.current) {
       const pos = new Vector3();
       gripperRef.current.getWorldPosition(pos);
-      if (phase == "reach")
-        console.log(
-          "gripper:",
-          pos.x.toFixed(2),
-          pos.y.toFixed(2),
-          pos.z.toFixed(2),
-        );
     }
   });
   return (
