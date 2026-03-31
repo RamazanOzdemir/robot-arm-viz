@@ -32,3 +32,20 @@ export const PHASE_ORDER: AnimationPhase[] = [
   "return",
   "idle",
 ];
+
+export const PHASE_COLORS: Record<AnimationPhase, string> = {
+  idle: "bg-muted text-white",
+  reach: "bg-teal text-white",
+  grasp: "bg-teal text-white",
+  lift: "bg-accent text-white",
+  transport: "bg-accent text-white",
+  release: "bg-teal text-white",
+  return: "bg-muted text-white",
+};
+
+export const JOINT_BAR_COLORS: Record<keyof JointAngles, string> = {
+  base: "bg-accent",
+  upper: "bg-teal",
+  lower: "bg-teal",
+  gripper: "bg-muted",
+};
