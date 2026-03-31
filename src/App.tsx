@@ -6,13 +6,14 @@ import "./App.css";
 import RobotScene from "./Scene";
 import { usePickAndPlaceController } from "./hooks/use-pick-and-place";
 import { cn } from "./utility";
+import { TelemetryPanel } from "./features/panel/components";
 
 // ─────────────────────────────────────────────────────────────────
 // App — lives OUTSIDE Canvas
 // Owns UI state via controller hook. Passes bridge into Canvas.
 // ─────────────────────────────────────────────────────────────────
 export default function App() {
-  const { phase, isRunning, joints, start, bridge } =
+  const { phase, isRunning, joints, start, bridge, metric } =
     usePickAndPlaceController();
 
   return (
@@ -22,6 +23,14 @@ export default function App() {
       <Canvas camera={{ position: [5, 5, 5], fov: 60 }}>
         <RobotScene bridge={bridge} joints={joints} phase={phase} />
       </Canvas>
+
+      {/* Telemetry Panel */}
+      <TelemetryPanel
+        joints={joints}
+        phase={phase}
+        cycleTime={metric.cycle}
+        fps={metric.fps}
+      />
 
       {/* Animation control button */}
       <div className="absolute bottom-20 left-1/2 -translate-x-1/2">
