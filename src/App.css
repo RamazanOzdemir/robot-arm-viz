@@ -2,8 +2,11 @@
 
 @theme {
   --color-bg-dark: #1a1a2e;
+  --color-bg-panel: #0d0d1a;
+  --color-bg-card: #13131f;
+  --color-bg-bar: #1e1e2e;
   --color-accent: #e76f51;
-  --color-muted: #555555;
   --color-teal: #2a9d8f;
+  --color-muted: #555555;
   --color-subtle: #aaaaaa;
 }
