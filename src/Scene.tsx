@@ -29,7 +29,7 @@ export default function RobotScene({ bridge, joints, phase }: RobotSceneProps) {
       <directionalLight position={[5, 5, 5]} intensity={1} />
       <OrbitControls />
       <Grid infiniteGrid fadeDistance={30} />
-      <RobotArm joints={joints} phase={phase} gripperRef={gripperRef} />
+      <RobotArm joints={joints} gripperRef={gripperRef} />
       <PickAndPlaceScene phase={phase} gripperRef={gripperRef} />
     </>
   );
